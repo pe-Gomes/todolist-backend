@@ -1,18 +1,25 @@
 package com.pedrogomes.todolist.user;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.time.LocalDateTime;
+import java.util.UUID;
+
+@Entity(name="tb_users")
 public class UserModel {
+    @Id
+    @GeneratedValue(generator = "UUID")
+    private UUID id;
+    @Column(unique = true)
     private String username;
     private String name;
     private String password;
-
-    @Override
-    public String toString() {
-        return "UserModel{" +
-                "username='" + username + '\'' +
-                ", name='" + name + '\'' +
-                ", password='" + password + '\'' +
-                '}';
-    }
+    @CreationTimestamp
+    private LocalDateTime createdAt;
 
     public String getUsername() {
         return username;
@@ -36,5 +43,12 @@ public class UserModel {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
     }
 }
